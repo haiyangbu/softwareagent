@@ -141,13 +141,13 @@ public class XMLParser {
 								}
 								else if ("goal".equals(node2.getNodeName().toLowerCase())) {
 									if(node2 instanceof Element) {
-										System.out.println("goal:" + node2.getTextContent().toLowerCase());
+										//System.out.println("goal:" + node2.getTextContent().toLowerCase());
 										m_goal_policy = node2.getTextContent().toLowerCase();
 									}
 								}
 								else if ("ball".equals(node2.getNodeName().toLowerCase())) {
 									if(node2 instanceof Element) {
-										System.out.println("ball:" + node2.getTextContent().toLowerCase());
+										//System.out.println("ball:" + node2.getTextContent().toLowerCase());
 										m_ball_policy = node2.getTextContent().toLowerCase();
 									}
 								}

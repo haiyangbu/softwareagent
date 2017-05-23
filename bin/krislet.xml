@@ -5,8 +5,8 @@
 
  <!-- There are 2 modes: reactive or state machine. 
       Please do not use both at the same time -->
- <!-- Runningmode>reactive</Runningmode -->
- <Runningmode>statemachine</Runningmode>
+ <Runningmode>reactive</Runningmode>
+ <!-- Runningmode>statemachine</Runningmode -->
 
 
  <ReactiveZones>
@@ -86,13 +86,15 @@
 
 
   <!-- Used to control which goal is the real goal, self or opposite.
-       Please do not use both at the same time -->
+       Please do not use both at the same time.
+       This is only for reactive mode. -->
   <goal>opposite</goal>
   <!-- goal>self</goal -->
 
 
   <!-- Used to control how player handle the ball, kick it or not.
-       Please do not use both at the same time -->
+       Please do not use both at the same time.
+	   This is only for reactive mode. -->
   <ball>kick</ball>
   <!-- ball>do not kick</ball -->
 
