@@ -17,6 +17,8 @@ public class XMLParser {
 	DealObstacle m_dealObs;
 	String m_goal = "Random";
 	String m_runningmode = "reactive";
+	String m_goal_policy;
+	String m_ball_policy;
 	
 	public XMLParser () {
 		System.out.println("XML Parser created.");
@@ -44,6 +46,8 @@ public class XMLParser {
 			System.out.println("kick:" + m_zones.get(i).m_kick_power);
 			System.out.println("run:" + m_zones.get(i).m_run_power);
 		}
+		System.out.println("goal:" + m_goal_policy);
+		System.out.println("ball:" + m_ball_policy);
 		System.out.println("----------------dump XML-------------------");
 	}
 
@@ -60,7 +64,7 @@ public class XMLParser {
 			Document dt = db.parse(f);
 			element = dt.getDocumentElement();
 			if (debug_xmlparser) {
-				System.out.println("Root:" + element.getNodeName());
+				System.out.println("root:" + element.getNodeName().toLowerCase());
 			}
 			NodeList childNodes0 = element.getChildNodes();
 			for (int i = 0; i < childNodes0.getLength(); i++) {
@@ -68,18 +72,18 @@ public class XMLParser {
 				
 				if(node1 instanceof Element) {
 					if (debug_xmlparser) {
-						System.out.println("<" + node1.getNodeName() + ">");
+						System.out.println("<" + node1.getNodeName().toLowerCase() + ">");
 					}
-					if ("ReactiveZones".equals(node1.getNodeName())) {
+					if ("reactivezones".equals(node1.getNodeName().toLowerCase())) {
 						NodeList childNodes1 = node1.getChildNodes();
 						for (int j = 0; j < childNodes1.getLength(); j++) {
 							Node node2 = childNodes1.item(j);
 							
 							if(node2 instanceof Element) {
 								if (debug_xmlparser) {
-									System.out.println("	<" + node2.getNodeName() + ">");
+									System.out.println("	<" + node2.getNodeName().toLowerCase() + ">");
 								}
-								if ("zone".equals(node2.getNodeName())) {
+								if ("zone".equals(node2.getNodeName().toLowerCase())) {
 									NodeList childNodes2 = node2.getChildNodes();
 									ZoneInfo zone = new ZoneInfo();
 									
@@ -88,15 +92,15 @@ public class XMLParser {
 										
 										if(node3 instanceof Element) {
 											if (debug_xmlparser) {
-												System.out.println("		<" + node3.getNodeName() + ">");
+												System.out.println("		<" + node3.getNodeName().toLowerCase() + ">");
 											}
-											if ("name".equals(node3.getNodeName())) {
-												zone.m_name = node3.getTextContent();
+											if ("name".equals(node3.getNodeName().toLowerCase())) {
+												zone.m_name = node3.getTextContent().toLowerCase();
 												if (debug_xmlparser) {
 													System.out.println("		 " + zone.m_name);
 												}
 											}
-											else if ("area_groups".equals(node3.getNodeName())) {
+											else if ("area_groups".equals(node3.getNodeName().toLowerCase())) {
 												NodeList childNodes3 = node3.getChildNodes();
 												
 												if (debug_xmlparser) {
@@ -106,26 +110,26 @@ public class XMLParser {
 													Node node4 = childNodes3.item(m);
 													
 													if(node4 instanceof Element) {
-														zone.add(node4.getTextContent());
+														zone.add(node4.getTextContent().toLowerCase());
 														if (debug_xmlparser) {
-															System.out.println("		<" + node4.getNodeName() + 
-																">" + node4.getTextContent());
+															System.out.println("		<" + node4.getNodeName().toLowerCase() + 
+																">" + node4.getTextContent().toLowerCase());
 														}
 													}
 												}
 											}
-											else if ("run_power".equals(node3.getNodeName())) {
+											else if ("run_power".equals(node3.getNodeName().toLowerCase())) {
 												Integer integer = 0;
-												zone.m_run_power = integer.parseInt(node3.getTextContent());
+												zone.m_run_power = integer.parseInt(node3.getTextContent().toLowerCase());
 												if (debug_xmlparser) {
 													System.out.println("		run power:" + zone.m_run_power);
 												}
 
 												
 											}
-											else if ("kick_power".equals(node3.getNodeName())) {
+											else if ("kick_power".equals(node3.getNodeName().toLowerCase())) {
 												Integer integer = 0;
-												zone.m_kick_power = integer.parseInt(node3.getTextContent());
+												zone.m_kick_power = integer.parseInt(node3.getTextContent().toLowerCase());
 												if (debug_xmlparser) {
 													System.out.println("		kick power:" + zone.m_kick_power);
 												}
@@ -135,21 +139,29 @@ public class XMLParser {
 									}
 									m_zones.addZone(zone);
 								}
+								else if ("goal".equals(node2.getNodeName().toLowerCase())) {
+									if(node2 instanceof Element) {
+										System.out.println("goal:" + node2.getTextContent().toLowerCase());
+										m_goal_policy = node2.getTextContent().toLowerCase();
+									}
+								}
+								else if ("ball".equals(node2.getNodeName().toLowerCase())) {
+									if(node2 instanceof Element) {
+										System.out.println("ball:" + node2.getTextContent().toLowerCase());
+										m_ball_policy = node2.getTextContent().toLowerCase();
+									}
+								}
 							}
 						}
 					}
-					else if ("Runningmode".equals(node1.getNodeName())) {
+					else if ("runningmode".equals(node1.getNodeName().toLowerCase())) {
 						if(node1 instanceof Element) {
-							System.out.println("run mode:" + node1.getTextContent());
-							m_runningmode = node1.getTextContent();
+							System.out.println("run mode:" + node1.getTextContent().toLowerCase());
+							m_runningmode = node1.getTextContent().toLowerCase();
 						}
 					}
-
 				}
-				
 			} //end for
-			
-			
 		}
 		catch (Exception e) {
 			e.printStackTrace();

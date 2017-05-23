@@ -5,6 +5,7 @@ public class State_Play extends State {
 	
 	public State_Play(StateMachine sm) {
 		m_sm = sm;
+		m_state = ROBOSTATE.PLAYING;
 		m_action_history = new Vector<String>(1);
 	}
 	
@@ -16,15 +17,29 @@ public class State_Play extends State {
 		if (m_action_history.size() < 3)
 			return true;
 		
-		for (int i = m_action_history.size() - 1; i >= 0; i --)
+		if (get_last_state() == ROBOSTATE.PUNISHING)
 		{
-			if (m_action_history.get(1).equals("kick") &&
-					m_action_history.get(2).equals("dash") &&
-					act.equals("kick"))
+			for (int i = m_action_history.size() - 1; i >= 0; i --)
 			{
-				return false;
+				if (m_action_history.get(1).equals("kick") &&
+						m_action_history.get(2).equals("dash") &&
+						act.equals("kick"))
+				{
+					return false;
+				}
+				else
+				{
+					m_action_history.add(act);
+					m_action_history.removeElementAt(0);
+				}
 			}
 		}
+		else
+		{
+			m_action_history.add(act);
+			m_action_history.removeElementAt(0);
+		}
+		
 		return true;
 	}
 	
@@ -89,17 +104,12 @@ public class State_Play extends State {
 					push_action("kick");
 					double dir_off = 0;
 					
-					if(player != null)
-						System.out.println("player:" + player.m_direction);
-					if(goal != null)
-						System.out.println("goal:" + goal.m_direction);
 				    //m_krislet.kick(m_brain.m_global_param.m_kick_power, object.m_direction);
 				    if (player != null && goal != null)
 						if ((player.m_direction - goal.m_direction) < 5)
 					    {
 					    	dir_off = 35;
-					    	System.out.println("get off direction......");
-					    	
+					    	//System.out.println("get off direction......");
 					    }
 				    
 				    if (goal != null)
@@ -128,9 +138,14 @@ public class State_Play extends State {
 				msg.contains("free_kick_") ||
 				msg.contains("corner_kick_") ||
 				msg.contains("goal_kick_") ||
-				msg.contains("offside_")) {
-			
+				msg.contains("offside_")) 
+		{
 			m_sm.setState(ROBOSTATE.PUNISHING);
+		}
+		else if (msg.contains("goal_") ||
+				msg.contains("half_time"))
+		{
+			m_sm.setState(ROBOSTATE.READY);
 		}
 
 	}

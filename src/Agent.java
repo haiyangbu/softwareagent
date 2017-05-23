@@ -81,6 +81,8 @@ public class Agent {
 	int m_run_power;
 	int m_kick_power;
 	char m_side;
+	String m_goal_policy;
+	String m_ball_policy;
 
 	int m_moving_mode; //0: straight, 1:wave
 	boolean m_kick_off;

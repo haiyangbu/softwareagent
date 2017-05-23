@@ -3,6 +3,7 @@ public class State_Ready extends State {
 	
 	public State_Ready(StateMachine sm) {
 		m_sm = sm;
+		m_state = ROBOSTATE.READY;
 	}
 
 	@Override
@@ -32,6 +33,7 @@ public class State_Ready extends State {
 		
 		if (msg.contains("goal_")) {
 			m_sm.moveback();
+			m_sm.setState(ROBOSTATE.READY);
 		}
 		else if (msg.contains("play_on") ||
 				msg.contains("kick_off_")) {

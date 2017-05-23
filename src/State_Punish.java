@@ -9,6 +9,7 @@ public class State_Punish extends State {
 	
 	public State_Punish(StateMachine sm) {
 		m_sm = sm;
+		m_state = ROBOSTATE.PUNISHING;
 	}
 
 	@Override
@@ -27,12 +28,24 @@ public class State_Punish extends State {
 			
 			m_punish_flag = false;
 			m_sm.setState(ROBOSTATE.PLAYING);
-
 		}
 		else {
-		}
-		
+			if (msg.contains("free_kick_") ||
+				msg.contains("corner_kick_") ||
+				msg.contains("goal_kick_") ||
+				msg.contains("offside_")) {
 
+				if (msg.charAt(msg.length() - 1) == 
+						m_sm.m_krislet.getMyside()) {
+					System.out.println("My kick please.........");
+					m_punish_flag = false;
+					m_sm.setState(ROBOSTATE.PLAYING);
+				}
+				else
+					System.out.println("You kick please.........");
+
+			}
+		}
 	}
 
 	@Override

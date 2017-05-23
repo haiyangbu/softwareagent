@@ -246,8 +246,10 @@ class World {
 			}
 			else {
 				if (m_debug)
+				{
 					System.out.println("X:" + x + ",Y:" + y);
-				throw new Exception("Failed to find a flag!");
+					throw new Exception("Failed to find a flag!");
+				}
 
 			}
 		}
@@ -272,14 +274,18 @@ class World {
 			}
 			else {
 				if (m_debug)
+				{
 					System.out.println("X:" + x + ",Y:" + y);
-				throw new Exception("Failed to find a flag!");
+					throw new Exception("Failed to find a flag!");
+				}
 			}
 		}
 		else {
 			if (m_debug)
+			{
 				System.out.println("X:" + x + ",Y:" + y);
-			throw new Exception("Failed to find a flag!");
+				throw new Exception("Failed to find a flag!");
+			}
 		}
 
 		if (m_debug) {

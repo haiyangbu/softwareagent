@@ -44,6 +44,8 @@ class Brain extends Thread implements SensorInput
     	if (m_env.m_xml.m_runningmode.equals("reactive"))
     	{
     		m_global_param.setRunmode(RUNNINGMODE.MODE_REACTIVE);
+    		m_global_param.m_ball_policy = m_env.m_xml.m_ball_policy;
+    		m_global_param.m_goal_policy = m_env.m_xml.m_goal_policy;
     		m_reactive = new ReactiveComp(this);
     	}
     	else {
@@ -57,6 +59,11 @@ class Brain extends Thread implements SensorInput
 		//m_pos.x = -30;
 		//m_pos.y = 10;
 		start();
+    }
+
+    public char getMyside()
+    {
+    	return m_global_param.m_side;
     }
 
 
@@ -94,8 +101,8 @@ class Brain extends Thread implements SensorInput
 			m_krislet.changeView("wide", "high");
 			System.out.println(" x:" + m_pos.x  + ",y:" + m_pos.y);
 		}
-	
-		System.out.println("^^^^^^^^^^^^^^^before_kick_off");
+
+		System.out.println("^^^^^^^^^^^^^^^before_kick_off^^^^^^^^^^^^^^^");
 		m_global_param.m_kick_power = 100;
 		m_global_param.m_run_power = 80;
 		m_global_param.m_kick_off = false;
@@ -179,14 +186,8 @@ class Brain extends Thread implements SensorInput
     
     public void body_sense(String msg)
     {
-    	//if (m_global_param.getRunmode() == RUNNINGMODE.MODE_REACTIVE)
     	//System.out.println("------:" + msg);
     	m_statemachine.body_sense(msg);
-    }
-    
-    public void printbody()
-    {
-    	m_statemachine.printbody();
     }
     
     public void moveback()
@@ -202,5 +203,5 @@ class Brain extends Thread implements SensorInput
     private Memory m_memory;				// place where all information is stored
     volatile private boolean m_timeOver;
     private String m_playMode;
-    
+
 }

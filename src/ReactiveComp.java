@@ -62,10 +62,22 @@ public class ReactiveComp {
 		{
 			// We know where is ball and we can kick it
 			// so look for goal
+			String goal;
 			if( m_brain.m_global_param.m_side == 'l' )
-			    object = mem.getObject("goal r");
+			{
+				if( m_brain.m_global_param.m_goal_policy.equals("self"))
+					goal = "goal l";
+				else
+					goal = "goal r";
+			}
 			else
-			    object = mem.getObject("goal l");
+			{
+				if( m_brain.m_global_param.m_goal_policy.equals("self"))
+					goal = "goal r";
+				else
+					goal = "goal l";
+			}
+			object = mem.getObject(goal);
 
 			if( object == null )
 		    {
@@ -74,7 +86,8 @@ public class ReactiveComp {
 		    }
 			else
 			{
-			   	krislet.kick(m_brain.m_global_param.m_kick_power, object.m_direction);
+				if (m_brain.m_global_param.m_ball_policy.equals("kick"))
+					krislet.kick(m_brain.m_global_param.m_kick_power, object.m_direction);
 			}
 		}
 	}

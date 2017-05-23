@@ -256,7 +256,7 @@ class Krislet implements SendCommand
 		if( m.group(1).compareTo("see") == 0 )
 		    {
 			//debug
-			if (true) {
+			if (false) {
 				String tmp = message;
 				String msg;
 				msg = tmp.substring(0, tmp.lastIndexOf(')') + 2);
@@ -273,8 +273,12 @@ class Krislet implements SendCommand
 		else if( m.group(1).compareTo("sense_body") == 0 )
 			{
 			//System.out.println("------:" + message);	
-			m_brain.body_sense(message);
 			}
+    }
+    
+    public char getMyside()
+    {
+    	return m_brain.getMyside();
     }
 
 

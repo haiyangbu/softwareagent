@@ -25,12 +25,23 @@ public class StateMachine {
 	private State m_statePunish;
 	private Brain m_brain;
 	protected SendCommand m_krislet;
-	String m_bodysense;
 
-	
+
 	public void setState(State state) {
+		ROBOSTATE st = ROBOSTATE.STATE_MAX;
+		
+		if (m_state == state)
+			return;
+
+		if (m_state != null)
+			st = m_state.get_current_state();
+		else
+			st = ROBOSTATE.READY;
 		m_state = state;
+		m_state.set_last_state(st);
 		m_state.next();
+		System.out.format("Last State: %s, Current State: %s\n\r",
+				m_state.get_last_state_name(), m_state.get_current_state_name());
 	}
 	
 	public void setState(ROBOSTATE state) {
@@ -51,7 +62,7 @@ public class StateMachine {
 	}
 	
 	public void see(Memory mem) {
-		//System.out.println("StateMachine see");
+		//System.out.println("StateMachine see:" + m_state.get_current_state_name());
 
 		m_state.see(mem, m_krislet);
 
@@ -72,20 +83,9 @@ public class StateMachine {
 	
 	public void body_sense(String msg)
 	{
-		//debug
-		if (true) {
-			String tmp = msg;
-			m_bodysense = tmp.substring(0, tmp.lastIndexOf(')') + 2);
-			//debug end
-		}
 
 	}
 	
-	public void printbody()
-	{
-		System.out.println("-- body:" + m_bodysense);
-	}
-
 	public void next() {
 		m_state.next();
 	}

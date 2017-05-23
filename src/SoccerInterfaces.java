@@ -33,6 +33,7 @@ interface SendCommand
     void changeView(String angle, String quality);
     // This function sends a bye command to the server
     void bye();
+    char getMyside();
 }
 
 
@@ -51,7 +52,7 @@ interface SensorInput
     //---------------------------------------------------------------------------
     // This function receives hear information from referee
     public void hear(int time, String message);
+
+	public char getMyside();
     
-    public void body_sense(String msg);
-    public void printbody();
 }

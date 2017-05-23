@@ -1,16 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
+
+
 <Common>
 
+ <!-- There are 2 modes: reactive or state machine. 
+      Please do not use both at the same time -->
  <!-- Runningmode>reactive</Runningmode -->
  <Runningmode>statemachine</Runningmode>
 
+
  <ReactiveZones>
 
+  <!-- Zones are areas that divided by different flags 
+       on the boarder of a playground. Around each flag,
+	   + or - 5 metters is the range of this area.
+	   We use bottom flags only, which divided the playground into
+	   6 areas. You can group them, and adjust the running and 
+	   kicking configuration.
+  -->
   <zone>
   <name>L1</name>
   <area_groups>
 	  <area>flag b l 50</area>
-	  <area>flag b l 40</area>
   </area_groups>
 
   <run_power>50</run_power>
@@ -20,6 +31,7 @@
   <zone>
   <name>L2</name>
   <area_groups>
+	  <area>flag b l 40</area>
 	  <area>flag b l 30</area>
 	  <area>flag b l 20</area>
   </area_groups>
@@ -71,22 +83,21 @@
   <run_power>90</run_power>
   <kick_power>100</kick_power>
   </zone>
-  
-  </ReactiveZones>
- 
-  <Role>
-  <Self>Defender</Self>
-  <Opponent>Attacker</Opponent>
-  </Role>
 
-  <!-->Goal>Ball</Goal-->
-  <Goal>Random</Goal>
-  
-  <DealObstacle>
-  <Igore>0</Igore>
-  <Stepdirection>left</Stepdirection>
-  </DealObstacle>
-  
+
+  <!-- Used to control which goal is the real goal, self or opposite.
+       Please do not use both at the same time -->
+  <goal>opposite</goal>
+  <!-- goal>self</goal -->
+
+
+  <!-- Used to control how player handle the ball, kick it or not.
+       Please do not use both at the same time -->
+  <ball>kick</ball>
+  <!-- ball>do not kick</ball -->
+
+  </ReactiveZones>
+
 
 </Common>
 
