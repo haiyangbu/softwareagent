@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Common>
+
+ <!-- Runningmode>reactive</Runningmode -->
+ <Runningmode>statemachine</Runningmode>
+
+ <ReactiveZones>
+
+  <zone>
+  <name>L1</name>
+  <area_groups>
+	  <area>flag b l 50</area>
+	  <area>flag b l 40</area>
+  </area_groups>
+
+  <run_power>50</run_power>
+  <kick_power>100</kick_power>
+  </zone>
+
+  <zone>
+  <name>L2</name>
+  <area_groups>
+	  <area>flag b l 30</area>
+	  <area>flag b l 20</area>
+  </area_groups>
+
+  <run_power>100</run_power>
+  <kick_power>50</kick_power>
+  </zone>
+
+  <zone>
+  <name>L3</name>
+  <area_groups>
+	  <area>flag b l 10</area>
+	  <area>flag b 0</area>
+  </area_groups>
+
+  <run_power>100</run_power>
+  <kick_power>95</kick_power>
+  </zone>
+ 
+  <zone>
+  <name>R3</name>
+  <area_groups>
+	  <area>flag b 0</area>
+	  <area>flag b r 10</area>
+  </area_groups>
+
+  <run_power>95</run_power>
+  <kick_power>100</kick_power>
+  </zone>
+
+  <zone>
+  <name>R2</name>
+  <area_groups>
+	  <area>flag b r 20</area>
+	  <area>flag b r 30</area>
+  </area_groups>
+
+  <run_power>90</run_power>
+  <kick_power>50</kick_power>
+  </zone>
+
+  <zone>
+  <name>R1</name>
+  <area_groups>
+	  <area>flag b r 40</area>
+	  <area>flag b r 50</area>
+  </area_groups>
+
+  <run_power>90</run_power>
+  <kick_power>100</kick_power>
+  </zone>
+  
+  </ReactiveZones>
+ 
+  <Role>
+  <Self>Defender</Self>
+  <Opponent>Attacker</Opponent>
+  </Role>
+
+  <!-->Goal>Ball</Goal-->
+  <Goal>Random</Goal>
+  
+  <DealObstacle>
+  <Igore>0</Igore>
+  <Stepdirection>left</Stepdirection>
+  </DealObstacle>
+  
+
+</Common>
+
